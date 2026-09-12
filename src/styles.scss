@@ -1,0 +1,199 @@
+@import "tailwindcss" source(none);
+@source "./app";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Definición del design system.
+ *
+ * El bloque @theme inline mapea las variables CSS personalizadas a las
+ * clases utilitarias de Tailwind (ej. --color-primary -> bg-primary, text-primary).
+ *
+ * Los bloques :root y .dark definen los valores reales de color en oklch.
+ * Todos los colores DEBEN usar el formato oklch.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.185 0.005 120);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.185 0.005 120);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.9 0.24 125);
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.24 0.01 120);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.24 0.01 120);
+  --muted-foreground: oklch(0.68 0.01 120);
+  --accent: oklch(0.9 0.24 125);
+  --accent-foreground: oklch(0.13 0 0);
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.9 0.24 125);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@theme inline {
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-danger: oklch(0.62 0.24 27);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Compensa la altura del navbar fijo para que el título de la sección
+     no quede tapado al llegar por un enlace ancla (#caracteristicas, etc.) */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #0a0a0a;
+    background-image:
+      linear-gradient(to right, rgba(180, 240, 0, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(180, 240, 0, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+
+@utility glow-lime {
+  text-shadow:
+    0 0 32px rgba(180, 240, 0, 0.55),
+    0 0 90px rgba(180, 240, 0, 0.25);
+}
+
+@utility cut-corner {
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px));
+}
+
+@utility diagonal-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(180, 240, 0, 0.5) 35%,
+    rgba(180, 240, 0, 0.5) 65%,
+    transparent
+  );
+  transform: skewY(-1.2deg);
+}
+
+@utility radar-pulse {
+  animation: radar-pulse 3s ease-out infinite;
+}
+
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.35);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes route-flow {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.route-flow {
+  stroke-dasharray: 10 8;
+  animation: route-flow 1.8s linear infinite;
+}
+
+.route-flow-slow {
+  stroke-dasharray: 6 10;
+  animation: route-flow 3.4s linear infinite reverse;
+  opacity: 0.6;
+}
+
+
+/* Efecto de aparición al hacer scroll (usado por ScrollRevealDirective) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+

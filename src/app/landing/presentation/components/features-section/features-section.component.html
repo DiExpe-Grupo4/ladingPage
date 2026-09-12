@@ -1,0 +1,26 @@
+<section id="caracteristicas" class="py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <h2 class="font-display max-w-2xl text-5xl sm:text-6xl" appScrollReveal>
+      Tres capas de <span class="text-primary">defensa operativa</span>
+    </h2>
+    <div class="mt-14 grid gap-6 md:grid-cols-3">
+      @for (feature of features; track feature.title; let i = $index) {
+        <article
+          appScrollReveal
+          [scrollRevealDelay]="i * 120"
+          class="cut-corner border bg-card/60 p-8 transition-colors"
+          [class]="(feature.danger ? 'border-danger/35 hover:border-danger' : 'border-border hover:border-primary') + (i % 3 === 1 ? ' md:-translate-y-6' : '')"
+        >
+          <app-icon
+            [name]="feature.icon"
+            [size]="36"
+            [strokeWidth]="1.4"
+            [class]="feature.danger ? 'text-danger' : 'text-primary'"
+          />
+          <h3 class="font-display mt-6 text-3xl">{{ feature.title }}</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{{ feature.text }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>

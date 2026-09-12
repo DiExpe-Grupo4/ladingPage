@@ -1,0 +1,12 @@
+<section id="estadistica" class="relative border-y border-primary/20 bg-card/40 py-14">
+  <div class="mx-auto grid max-w-7xl gap-10 px-6 sm:grid-cols-3">
+    @for (stat of stats; track stat.label; let i = $index) {
+      <div class="text-center sm:text-left" appScrollReveal [scrollRevealDelay]="i * 120">
+        <p class="font-display text-6xl text-primary">
+          <app-count-up [to]="stat.value" [suffix]="stat.suffix" />
+        </p>
+        <p class="mt-2 text-sm uppercase tracking-widest text-muted-foreground">{{ stat.label }}</p>
+      </div>
+    }
+  </div>
+</section>

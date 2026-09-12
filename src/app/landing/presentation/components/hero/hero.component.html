@@ -1,0 +1,36 @@
+<section id="top" class="relative overflow-hidden pt-36 pb-24">
+  <div class="pointer-events-none absolute -left-40 top-24 size-[520px] rounded-full bg-primary/12 blur-[140px]"></div>
+  <div class="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-[1.05fr_1fr]">
+    <div>
+      <span class="inline-flex items-center gap-2 border border-primary/40 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.25em] text-primary">
+        <span class="size-1.5 animate-pulse bg-primary"></span>
+        Unidad de protección táctica
+      </span>
+      <h1 class="font-display mt-7 text-6xl sm:text-7xl lg:text-8xl">
+        <span class="block text-foreground">Cortamos la amenaza</span>
+        <span class="glow-lime block text-primary">antes de que suba</span>
+      </h1>
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
+        Avisum blinda la operación diaria del transporte urbano en Lima: identidad del conductor
+        verificada en cada turno, botón de pánico enlazado a una central activa 24/7 y la flota
+        completa bajo seguimiento GPS en vivo. Sin intermediarios, sin demoras.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a
+          href="#apoyo"
+          class="font-display inline-flex items-center gap-2 bg-primary px-8 py-4 text-lg tracking-widest text-primary-foreground transition-transform hover:-translate-y-0.5"
+        >
+          Empezar ahora
+          <app-icon name="arrow-right" [size]="20" />
+        </a>
+        <a
+          href="#caracteristicas"
+          class="font-display inline-flex items-center border border-border px-8 py-4 text-lg tracking-widest text-foreground transition-colors hover:border-primary hover:text-primary"
+        >
+          Ver características
+        </a>
+      </div>
+    </div>
+    <app-monitor-mockup [metrics]="monitorMetrics" />
+  </div>
+</section>

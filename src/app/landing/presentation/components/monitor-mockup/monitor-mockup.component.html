@@ -1,0 +1,85 @@
+<div class="relative">
+  <div class="pointer-events-none absolute -inset-8 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
+  <div class="cut-corner relative border border-primary/25 bg-card/70 p-4 backdrop-blur-sm">
+    <div class="flex items-center justify-between border-b border-border pb-3">
+      <div class="flex items-center gap-2 font-display text-sm tracking-widest text-primary">
+        <app-icon name="radio" [size]="16" />
+        Central de operaciones
+      </div>
+      <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-muted-foreground">
+        <span class="size-2 animate-pulse rounded-full bg-primary"></span>
+        En vivo
+      </div>
+    </div>
+
+    <div class="relative mt-4 aspect-4/3 overflow-hidden bg-[#0d0f0b]">
+      <svg class="absolute inset-0 size-full" viewBox="0 0 400 300" aria-hidden="true">
+        <defs>
+          <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+            <path d="M25 0H0V25" fill="none" stroke="rgba(180,240,0,0.10)" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="400" height="300" fill="url(#grid)" />
+
+        <path
+          d="M40 -10 L90 120 L60 310"
+          fill="none"
+          stroke="rgba(255,255,255,0.12)"
+          stroke-width="2"
+          class="route-flow-slow"
+        />
+        <path
+          d="M410 200 L250 230 L150 310"
+          fill="none"
+          stroke="rgba(255,255,255,0.12)"
+          stroke-width="2"
+          class="route-flow-slow"
+        />
+
+        <path
+          id="routeMain"
+          d="M-10 210 L120 190 L200 120 L300 105 L410 60"
+          fill="none"
+          stroke="rgba(180,240,0,0.55)"
+          stroke-width="3"
+          class="route-flow"
+        />
+
+        <circle r="4" fill="#b4f000" style="filter: drop-shadow(0 0 6px rgba(180,240,0,0.9))">
+          <animateMotion dur="3.5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#routeMain" xlink:href="#routeMain" />
+          </animateMotion>
+        </circle>
+      </svg>
+
+      <div class="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2">
+        <span class="radar-pulse absolute inset-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/60"></span>
+        <span
+          class="radar-pulse absolute inset-1/2 size-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/40"
+          style="animation-delay: 1.5s"
+        ></span>
+        <div class="relative flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground">
+          <app-icon name="bus" [size]="20" />
+        </div>
+      </div>
+
+      <div class="absolute bottom-3 left-3 border border-primary/30 bg-background/85 px-3 py-2">
+        <p class="font-display text-sm tracking-wide text-foreground">Ruta 73 · Bus A-412</p>
+        <p class="text-[11px] text-muted-foreground">Av. Túpac Amaru · 34 km/h</p>
+      </div>
+      <div class="absolute right-3 top-3 flex items-center gap-2 border border-primary/40 bg-background/85 px-2 py-1 text-[11px] uppercase tracking-widest text-primary">
+        <app-icon name="shield-check" [size]="14" />
+        Conductor verificado
+      </div>
+    </div>
+
+    <div class="mt-4 grid grid-cols-3 gap-px bg-border text-center">
+      @for (metric of metrics; track metric.label) {
+        <div class="bg-card px-2 py-3">
+          <p class="font-display text-xl text-primary">{{ metric.value }}</p>
+          <p class="text-[10px] uppercase tracking-widest text-muted-foreground">{{ metric.label }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
