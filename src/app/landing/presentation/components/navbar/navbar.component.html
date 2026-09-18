@@ -1,11 +1,14 @@
+
 <header
   class="fixed inset-x-0 top-0 z-50 border-b transition-all duration-300"
-  [class]="scrolled() ? 'border-primary/20 bg-background/70 backdrop-blur-xl' : 'border-transparent'"
+  [class]="scrolled() || mobileMenuOpen() ? 'border-primary/20 bg-background/70 backdrop-blur-xl' : 'border-transparent'"
 >
   <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-    <a href="#top" class="flex items-center">
+    
+    <a href="#top" class="flex items-center" (click)="closeMobileMenu()">
       <img src="images/logoAvisum.png" alt="Avisum" class="h-12 w-auto" />
     </a>
+
     <ul class="hidden items-center gap-8 md:flex">
       @for (item of nav; track item.href) {
         <li>
@@ -18,14 +21,56 @@
         </li>
       }
     </ul>
+
     <div class="flex items-center gap-3">
       <a
-        href="#apoyo"
-        class="font-display bg-primary px-6 py-2.5 text-base tracking-widest text-primary-foreground transition-transform hover:-translate-y-0.5"
+        href="https://avisum-frontend.vercel.app/conductor/login"
+        (click)="closeMobileMenu()"
+        class="font-display hidden bg-primary px-6 py-2.5 text-base tracking-widest text-primary-foreground transition-transform hover:-translate-y-0.5 sm:inline-flex"
       >
         Ingresar
       </a>
-      <app-icon name="menu" [size]="24" class="text-muted-foreground md:hidden" />
+
+      <button
+        type="button"
+        (click)="toggleMobileMenu()"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-label="Abrir menú"
+        class="flex items-center justify-center text-muted-foreground md:hidden"
+      >
+        <app-icon
+          [name]="mobileMenuOpen() ? 'arrow-right' : 'menu'"
+          [size]="24"
+        />
+      </button>
     </div>
   </nav>
+
+  @if (mobileMenuOpen()) {
+    <ul
+      class="flex flex-col border-t border-border bg-background/95 px-6 py-4 backdrop-blur-xl md:hidden"
+    >
+      @for (item of nav; track item.href) {
+        <li>
+          <a
+            [href]="item.href"
+            (click)="closeMobileMenu()"
+            class="block py-3 text-sm font-medium uppercase tracking-widest text-muted-foreground transition-colors hover:text-primary"
+          >
+            {{ item.label }}
+          </a>
+        </li>
+      }
+
+      <li class="pt-2 sm:hidden">
+        <a
+          href="https://avisum-frontend.vercel.app/conductor/login"
+          (click)="closeMobileMenu()"
+          class="font-display block bg-primary px-6 py-3 text-center text-base tracking-widest text-primary-foreground"
+        >
+          Ingresar
+        </a>
+      </li>
+    </ul>
+  }
 </header>
