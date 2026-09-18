@@ -14,9 +14,18 @@ export class NavbarComponent {
   @Input({ required: true }) nav: readonly NavItem[] = [];
 
   protected readonly scrolled = signal(false);
+  protected readonly mobileMenuOpen = signal(false);
 
   @HostListener('window:scroll')
   onWindowScroll(): void {
     this.scrolled.set(window.scrollY > 24);
+  }
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen.update((open) => !open);
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen.set(false);
   }
 }
